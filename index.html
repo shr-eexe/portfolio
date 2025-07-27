@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shree Lakshmi's Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     :root {
@@ -33,9 +34,12 @@
 
     * {
       box-sizing: border-box;
-      font-family: 'Fredoka', sans-serif;
+      font-family: 'Inter', sans-serif;
       transition: all 0.3s ease;
     }
+    h1, h2, h3, .top-title {
+  font-family: 'Inter', serif;
+}
 
     html {
       scroll-behavior: smooth;
@@ -46,6 +50,37 @@
       background-color: var(--beige);
       color: var(--black);
       display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50px;
+      background-color: var(--mint);
+      border-bottom: 2px solid black;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      z-index: 1001;
+      box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+    }
+
+    .topbar .top-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .topbar button {
+      background: var(--yellow);
+      border: 2px solid black;
+      border-radius: 6px;
+      padding: 0.4rem 0.6rem;
+      font-size: 1.2rem;
+      cursor: pointer;
     }
 
     /* Sidebar */
@@ -53,9 +88,9 @@
       width: 250px;
       background-color: var(--mint);
       position: fixed;
-      top: 0;
+      top: 50px;
       left: -250px;
-      height: 100vh;
+      height: calc(100vh - 50px);
       padding: 2rem 1rem;
       transition: left 0.3s ease;
       z-index: 1000;
@@ -78,6 +113,7 @@
       font-weight: bold;
       text-decoration: none;
       color: inherit;
+      cursor: pointer;
     }
 
     aside nav a.active {
@@ -85,37 +121,9 @@
       text-decoration: underline;
     }
 
-    /* Theme Toggle */
-    .theme-toggle {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background: var(--yellow);
-      border: 2px solid black;
-      border-radius: 6px;
-      padding: 0.4rem 0.6rem;
-      font-size: 1.2rem;
-      cursor: pointer;
-      z-index: 1001;
-    }
-
-    /* Sidebar toggle (hamburger) */
-    .sidebar-toggle {
-      position: fixed;
-      top: 1rem;
-      left: 1rem;
-      background: var(--yellow);
-      border: 2px solid black;
-      border-radius: 6px;
-      padding: 0.4rem 0.6rem;
-      font-size: 1.2rem;
-      cursor: pointer;
-      z-index: 1001;
-    }
-
-    /* Main Content */
     main {
       margin-left: 0;
+      margin-top: 70px;
       padding: 2rem;
       flex: 1;
       display: grid;
@@ -189,11 +197,6 @@
       background-color: var(--lavender);
     }
 
-    .projects {
-      grid-column: span 2;
-      background-color: var(--pink);
-    }
-
     .contact {
       grid-column: span 2;
       background-color: var(--white);
@@ -230,6 +233,76 @@
       text-decoration: underline;
     }
 
+    /* Retro Modal */
+    .retro-modal {
+      position: fixed;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      max-width: 600px;
+      max-height: 70vh;
+      background: var(--white);
+      border: 4px solid black;
+      box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.8);
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .retro-modal-header {
+      background: var(--yellow);
+      border-bottom: 4px solid black;
+      padding: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+    }
+@keyframes pulseGlow {
+  0%, 100% {
+    text-shadow:
+      0 0 5px #fcd34d,
+      0 0 10px #fcd34d,
+      0 0 15px #fbbf24,
+      0 0 20px #fbbf24;
+  }
+  50% {
+    text-shadow:
+      0 0 2px #fcd34d,
+      0 0 4px #fcd34d,
+      0 0 8px #fbbf24,
+      0 0 12px #fbbf24;
+  }
+}
+
+
+[data-theme="dark"] .retro-glow {
+  animation: pulseGlow 1.8s infinite ease-in-out;
+}
+
+
+
+    .retro-modal-header button {
+      background: var(--pink);
+      border: 2px solid black;
+      padding: 0 0.5rem;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    .retro-modal-body {
+      padding: 1rem;
+      overflow-y: auto;
+      flex-grow: 1;
+      background: var(--beige);
+    }
+
+    .hidden {
+      display: none;
+    }
+
     @media (max-width: 768px) {
       main {
         grid-template-columns: 1fr;
@@ -251,20 +324,58 @@
         text-align: center;
       }
     }
+      .retro-modal {
+      animation: modalOpen 0.3s ease-out;
+    }
+
+    @keyframes modalOpen {
+      from {
+        transform: translateX(-50%) scale(0.9);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+      }
+    }
+
+    .dock {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: var(--mint);
+      border-top: 4px solid black;
+      display: flex;
+      gap: 1rem;
+      padding: 0.5rem;
+      z-index: 1000;
+    }
+
+    .dock button {
+      background: var(--lavender);
+      border: 2px solid black;
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <button class="sidebar-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
-  <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-lightbulb"></i></button>
+  <!-- Retro Topbar -->
+  <div class="topbar">
+    <button onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+    <span class="top-title retro-glow">Shree Lakshmi</span>
+    <button onclick="toggleTheme()"><i class="fas fa-lightbulb"></i></button>
+  </div>
 
+  <!-- Sidebar -->
   <aside id="sidebar">
-    <br>
-    <br>
     <h1>SHREE LAKSHMI</h1>
     <nav>
       <a href="#home">Home</a>
       <a href="#about">About</a>
-      <a href="#projects">Projects</a>
+      <a href="#!" onclick="openProjects()">Projects</a>
       <a href="#contact">Contact</a>
     </nav>
   </aside>
@@ -284,15 +395,9 @@
 
     <section class="card about" id="about">
       <h2>About Me</h2>
-      <p>I am intersted in working on AI-powered wearables and embedded systems. Passionate about human-centered health tech.
-        I am also intersted in Data Science and Machine Learning.
+      <p>I am interested in working on AI-powered wearables and embedded systems. Passionate about human-centered health tech.
+        I am also interested in Data Science and Machine Learning.
       </p>
-    </section>
-
-    <section class="card projects" id="projects">
-      <h2>Projects</h2>
-      <h3>RightBeat</h3>
-      <p>AI-powered smartwatch for detecting early heart abnormalities and alerting medical assistance.</p>
     </section>
 
     <section class="card skills">
@@ -316,6 +421,20 @@
     </section>
   </main>
 
+  <!-- Retro Projects Modal -->
+  <div id="projectsModal" class="retro-modal hidden">
+    <div class="retro-modal-header">
+      <span>Projects</span>
+      <button onclick="closeProjects()">&times;</button>
+    </div>
+    <div class="retro-modal-body">
+      <h3>RightBeat</h3>
+      <p>AI-powered smartwatch for detecting early heart abnormalities and alerting medical assistance.</p>
+      <!-- Add more projects as needed -->
+    </div>
+  </div>
+  <div id="dock" class="dock"></div>
+
   <script>
     function toggleTheme() {
       const html = document.documentElement;
@@ -327,7 +446,85 @@
       sidebar.classList.toggle('open');
     }
 
-    // Scrollspy + Fade-in
+    function openProjects() {
+      document.getElementById('projectsModal').classList.remove('hidden');
+    }
+
+    function closeProjects() {
+      document.getElementById('projectsModal').classList.add('hidden');
+    }
+     let modalCount = 0;
+    function openProjects() {
+      const modal = document.createElement('div');
+      modal.className = 'retro-modal';
+      modal.style.top = `${80 + modalCount * 30}px`;
+      modal.style.left = `${50 + modalCount * 2}%`;
+      modal.style.transform = `translateX(-50%)`;
+      modal.innerHTML = `
+        <div class="retro-modal-header" onmousedown="startDrag(event, this.parentElement)">
+          <span>Project Window</span>
+          <div>
+            <button onclick="minimizeWindow(this.parentElement.parentElement.parentElement)">_</button>
+            <button onclick="closeWindow(this.closest('.retro-modal'))">&times;</button>
+
+          </div>
+        </div>
+        <div class="retro-modal-body">
+          <h3>RightBeat</h3>
+          <p>AI-powered smartwatch for detecting early heart abnormalities and alerting medical assistance.</p>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      modalCount++;
+    }
+     function minimizeWindow(modal) {
+  modal.style.display = 'none';
+  const dock = document.getElementById('dock');
+  const btn = document.createElement('button');
+  btn.textContent = 'Project';
+  btn.onclick = () => {
+    modal.style.display = 'block';
+    dock.removeChild(btn);
+  };
+  // Link the button to the modal
+  btn.dataset.modalId = modal.dataset.modalId = `modal-${Date.now()}`;
+  dock.appendChild(btn);
+}
+
+function closeWindow(modal) {
+  const dock = document.getElementById('dock');
+  // Remove related dock button
+  const dockButtons = dock.querySelectorAll('button');
+  dockButtons.forEach(btn => {
+    if (btn.dataset.modalId === modal.dataset.modalId) {
+      dock.removeChild(btn);
+    }
+  });
+  modal.remove();
+}
+
+
+    function startDrag(e, modal) {
+      e.preventDefault();
+      let offsetX = e.clientX - modal.offsetLeft;
+      let offsetY = e.clientY - modal.offsetTop;
+
+      function move(e) {
+        modal.style.left = e.clientX - offsetX + 'px';
+        modal.style.top = e.clientY - offsetY + 'px';
+        modal.style.transform = 'none';
+      }
+
+      function stop() {
+        document.removeEventListener('mousemove', move);
+        document.removeEventListener('mouseup', stop);
+      }
+
+      document.addEventListener('mousemove', move);
+      document.addEventListener('mouseup', stop);
+    }
+
+
     const sections = document.querySelectorAll("section");
     const navLinks = document.querySelectorAll("aside nav a");
 
@@ -364,6 +561,7 @@
     });
 
     window.addEventListener("load", handleFadeIn);
+    
   </script>
 </body>
 </html>
