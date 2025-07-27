@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shree Lakshmi's Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     :root {
@@ -32,14 +32,25 @@
       --glass: rgba(255, 255, 255, 0.05);
     }
 
-    * {
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-      transition: all 0.3s ease;
-    }
-    h1, h2, h3, .top-title {
-  font-family: 'Inter', serif;
+   * {
+  box-sizing: border-box;
+  font-family: 'Press Start 2P', cursive;
+  transition: all 0.3s ease;
 }
+
+
+
+   h1, h2, h3, h4, .top-title,
+.retro-modal-header span,
+.project-icon span,
+aside h1,
+aside nav a {
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size:0.8rem;
+}
+
 
     html {
       scroll-behavior: smooth;
@@ -243,23 +254,42 @@
       max-width: 600px;
       max-height: 70vh;
       background: var(--white);
-      border: 4px solid black;
-      box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.8);
+      border: 5px solid black;
+      box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.8);
       z-index: 2000;
       display: flex;
       flex-direction: column;
-      font-family: 'Courier New', Courier, monospace;
+      font-family: 'Press start 2P',cursive;
     }
 
     .retro-modal-header {
-      background: var(--yellow);
-      border-bottom: 4px solid black;
-      padding: 0.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: bold;
-    }
+  background: var(--yellow);
+  border-bottom: 4px solid black;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: black;
+}
+.retro-modal-header button {
+  background: var(--yellow);
+  border: 2px solid black;
+  box-shadow: 2px 2px 0 black;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+  width: 28px;
+  height: 28px;
+  margin-left: 4px;
+  cursor: pointer;
+  color: black;
+}
+.retro-modal-header button:hover {
+  background: #ff9f43;
+}
+
 @keyframes pulseGlow {
   0%, 100% {
     text-shadow:
@@ -276,6 +306,20 @@
       0 0 12px #fbbf24;
   }
 }
+@keyframes retroZoomIn {
+  0% {
+    transform: scale(0.7) translateX(-50%);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.1) translateX(-50%);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translateX(-50%);
+  }
+}
+
 
 
 [data-theme="dark"] .retro-glow {
@@ -285,19 +329,33 @@
 
 
     .retro-modal-header button {
-      background: var(--pink);
-      border: 2px solid black;
-      padding: 0 0.5rem;
-      cursor: pointer;
-      font-size: 1.2rem;
-    }
+  background: #fcd34d;
+  border: 2px solid black;
+  box-shadow: 2px 2px 0 black;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+  width: 28px;
+  height: 28px;
+  margin-left: 4px;
+  cursor: pointer;
+  color: black;
+}
+
+.retro-modal-header button:hover {
+  background: #faaf4c;
+  box-shadow: inset 1px 1px 0 black;
+}
+
 
     .retro-modal-body {
-      padding: 1rem;
-      overflow-y: auto;
-      flex-grow: 1;
-      background: var(--beige);
-    }
+  padding: 1rem;
+  overflow-y: auto;
+  flex-grow: 1;
+  background: var(--beige);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.6rem;
+}
+
 
     .hidden {
       display: none;
@@ -359,6 +417,45 @@
       font-weight: bold;
       cursor: pointer;
     }
+    .project-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.project-icon {
+  width: 100px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.project-icon i {
+  font-size: 2.5rem;
+  color: #facc15;
+  text-shadow: 1px 1px 0 #000, 2px 2px 0 #000;
+}
+
+
+.project-icon span {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.55rem;
+  font-weight: normal;
+}
+
+.project-icon:hover {
+  transform: translateY(-2px);
+  text-shadow: 0 0 5px var(--yellow);
+}
+@media (max-width: 768px) {
+  body {
+    font-size: 10px;
+  }
+}
+
+
   </style>
 </head>
 <body>
@@ -461,19 +558,31 @@
       modal.style.left = `${50 + modalCount * 2}%`;
       modal.style.transform = `translateX(-50%)`;
       modal.innerHTML = `
-        <div class="retro-modal-header" onmousedown="startDrag(event, this.parentElement)">
-          <span>Project Window</span>
-          <div>
-            <button onclick="minimizeWindow(this.parentElement.parentElement.parentElement)">_</button>
-            <button onclick="closeWindow(this.closest('.retro-modal'))">&times;</button>
+  <div class="retro-modal-header" onmousedown="startDrag(event, this.parentElement)">
+    <span>Projects</span>
+    <div>
+      <button onclick="minimizeWindow(this.parentElement.parentElement.parentElement)">_</button>
+      <button onclick="closeWindow(this.closest('.retro-modal'))">&times;</button>
+    </div>
+  </div>
+  <div class="retro-modal-body">
+    <div class="project-list">
+      <div class="project-icon" onclick="openProjectDetails('RightBeat')">
+        <i class="fas fa-folder"></i>
+        <span>RightBeat</span>
+      </div>
+      <div class="project-icon" onclick="openProjectDetails('VisionCare')">
+        <i class="fas fa-folder"></i>
+        <span>VisionCare</span>
+      </div>
+      <div class="project-icon" onclick="openProjectDetails('EduBot')">
+        <i class="fas fa-folder"></i>
+        <span>EduBot</span>
+      </div>
+    </div>
+  </div>
+`;
 
-          </div>
-        </div>
-        <div class="retro-modal-body">
-          <h3>RightBeat</h3>
-          <p>AI-powered smartwatch for detecting early heart abnormalities and alerting medical assistance.</p>
-        </div>
-      `;
       document.body.appendChild(modal);
       modalCount++;
     }
@@ -502,6 +611,41 @@ function closeWindow(modal) {
   });
   modal.remove();
 }
+function openProjectDetails(projectName) {
+  const modal = document.createElement('div');
+  modal.className = 'retro-modal';
+  modal.style.top = `${100 + Math.random() * 100}px`;
+  modal.style.left = `${30 + Math.random() * 40}%`;
+  modal.style.transform = `translateX(-50%)`;
+  modal.innerHTML = `
+    <div class="retro-modal-header" onmousedown="startDrag(event, this.parentElement)">
+      <span>${projectName}</span>
+      <div>
+        <button onclick="minimizeWindow(this.parentElement.parentElement.parentElement)">_</button>
+        <button onclick="closeWindow(this.closest('.retro-modal'))">&times;</button>
+      </div>
+    </div>
+    <div class="retro-modal-body">
+      ${getProjectContent(projectName)}
+    </div>
+  `;
+  modal.style.animation = 'retroZoomIn 0.4s ease-out';
+
+  document.body.appendChild(modal);
+}
+function getProjectContent(name) {
+  switch(name) {
+    case 'RightBeat':
+      return `<p><strong>RightBeat</strong> is an AI-powered smartwatch that detects abnormal heart rhythms and automatically alerts healthcare providers.</p>`;
+    case 'VisionCare':
+      return `<p><strong>VisionCare</strong> monitors screen usage and provides break reminders to prevent digital eye strain using smart notifications.</p>`;
+    case 'EduBot':
+      return `<p><strong>EduBot</strong> is a conversational AI bot that helps students learn coding concepts interactively.</p>`;
+    default:
+      return `<p>No project details available.</p>`;
+  }
+}
+
 
 
     function startDrag(e, modal) {
