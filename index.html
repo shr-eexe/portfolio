@@ -193,11 +193,13 @@ aside nav a {
     }
 
     .hero-text h2 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
     }
 
     .hero-text p {
+      font-family: 'Press Start 2P', sans-serif;
       font-size: 1.1rem;
       line-height: 1.6;
     }
@@ -471,7 +473,7 @@ aside nav a {
     <h1>SHREE LAKSHMI</h1>
     <nav>
       <a href="#home">Home</a>
-      <a href="#about">About</a>
+      <a href="#!" onclick="openAboutMe()">About</a>
       <a href="#!" onclick="openProjects()">Projects</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -491,10 +493,14 @@ aside nav a {
     </section>
 
     <section class="card about" id="about">
-      <h2>About Me</h2>
-      <p>I am interested in working on AI-powered wearables and embedded systems. Passionate about human-centered health tech.
-        I am also interested in Data Science and Machine Learning.
-      </p>
+      <h1>About Me</h1>
+      <p>Name:Shree Lakshmi K</p>
+      <p>Age:19</p>
+      <p>DOB:25.11.2005</p>
+      <p>Location:Chennai, India</p>
+      <p>Interest:Drawing, Meaning-less Walks,
+      Anime, Weird Information about un-related topics.</p>
+      
     </section>
 
     <section class="card skills">
@@ -571,13 +577,13 @@ aside nav a {
         <i class="fas fa-folder"></i>
         <span>RightBeat</span>
       </div>
-      <div class="project-icon" onclick="openProjectDetails('VisionCare')">
+      <div class="project-icon" onclick="openProjectDetails('Finanance Tracker')">
         <i class="fas fa-folder"></i>
-        <span>VisionCare</span>
+        <span>Finance Tracker</span>
       </div>
-      <div class="project-icon" onclick="openProjectDetails('EduBot')">
+      <div class="project-icon" onclick="openProjectDetails('Workout Tracker')">
         <i class="fas fa-folder"></i>
-        <span>EduBot</span>
+        <span>Workout Tracker</span>
       </div>
     </div>
   </div>
@@ -595,14 +601,12 @@ aside nav a {
     modal.style.display = 'block';
     dock.removeChild(btn);
   };
-  // Link the button to the modal
   btn.dataset.modalId = modal.dataset.modalId = `modal-${Date.now()}`;
   dock.appendChild(btn);
 }
 
 function closeWindow(modal) {
   const dock = document.getElementById('dock');
-  // Remove related dock button
   const dockButtons = dock.querySelectorAll('button');
   dockButtons.forEach(btn => {
     if (btn.dataset.modalId === modal.dataset.modalId) {
@@ -637,10 +641,10 @@ function getProjectContent(name) {
   switch(name) {
     case 'RightBeat':
       return `<p><strong>RightBeat</strong> is an AI-powered smartwatch that detects abnormal heart rhythms and automatically alerts healthcare providers.</p>`;
-    case 'VisionCare':
+    case 'Finance Tracker':
       return `<p><strong>VisionCare</strong> monitors screen usage and provides break reminders to prevent digital eye strain using smart notifications.</p>`;
     case 'EduBot':
-      return `<p><strong>EduBot</strong> is a conversational AI bot that helps students learn coding concepts interactively.</p>`;
+      return `<p><strong>Workout Tracker</strong> is a conversational AI bot that helps students learn coding concepts interactively.</p>`;
     default:
       return `<p>No project details available.</p>`;
   }
@@ -705,6 +709,87 @@ function getProjectContent(name) {
     });
 
     window.addEventListener("load", handleFadeIn);
+    function openAboutMe() {
+  const modal = document.createElement('div');
+  modal.className = 'retro-modal';
+  modal.style.top = `${80 + Math.random() * 100}px`;
+  modal.style.left = `${30 + Math.random() * 40}%`;
+  modal.style.transform = `translateX(-50%)`;
+
+  modal.innerHTML = `
+    <div class="retro-modal-header" onmousedown="startDrag(event, this.parentElement)">
+      <span>About Me</span>
+      <div>
+        <button onclick="minimizeWindow(this.parentElement.parentElement.parentElement)">_</button>
+        <button onclick="closeWindow(this.closest('.retro-modal'))">&times;</button>
+      </div>
+    </div>
+    <div class="retro-modal-body">
+      <div class="project-list">
+        <div class="project-icon" onclick="openAboutDetail('Proper Name')">
+          <i class="fas fa-folder"></i>
+          <span>Proper Name</span>
+        </div>
+        <div class="project-icon" onclick="openAboutDetail('Place Name')">
+          <i class="fas fa-folder"></i>
+          <span>Place Name</span>
+        </div>
+        <div class="project-icon" onclick="openAboutDetail('Backstory Stuff')">
+          <i class="fas fa-folder"></i>
+          <span>Backstory Stuff</span>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+}
+function openAboutDetail(name) {
+  const modal = document.createElement('div');
+  modal.className = 'retro-modal';
+  modal.style.top = `${120 + Math.random() * 50}px`;
+  modal.style.left = `${30 + Math.random() * 40}%`;
+  modal.style.transform = `translateX(-50%)`;
+
+  modal.innerHTML = `
+    <div class="retro-modal-header" onmousedown="startDrag(event, this.parentElement)">
+      <span>${name}</span>
+      <div>
+        <button onclick="minimizeWindow(this.parentElement.parentElement.parentElement)">_</button>
+        <button onclick="closeWindow(this.closest('.retro-modal'))">&times;</button>
+      </div>
+    </div>
+    <div class="retro-modal-body">
+      ${getAboutContent(name)}
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+}
+
+function getAboutContent(name) {
+  switch(name) {
+    case 'Proper Name':
+      return `<p><strong>Shree Lakshmi K</strong><br><br>This is my full name, used in all official and academic documents.</p>`;
+    case 'Place Name':
+      return `<p>Chennai is where my homebase is at. Vellore is where I am currently persuing my degree</p>`;
+    case 'Backstory Stuff':
+      return `
+        <p>
+          Born in Chennai, growing up I thought I would become a doctor. At least till my 10th grade that’s what I thought.<br><br>
+          I took Physics, Chemistry, Math, and Biology in 11th – a combo most students pick when they don’t know what they want yet. I was one of them.<br><br>
+          But COVID-19 completely changed the way I saw doctors. For the next two years, I was focused on becoming a designer — building a portfolio, learning color theory, perspective, and more.<br><br>
+          Then during one of my most important entrance exams, I flunked. That moment crushed me. I stood at a crossroad — between medicine and engineering.<br><br>
+          And that’s how I ended up choosing Computer Science — without any prior background in coding or technical experience.
+        </p>
+      `;
+    default:
+      return `<p>No content found.</p>`;
+  }
+}
+
+
+
     
   </script>
 </body>
