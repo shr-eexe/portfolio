@@ -62,6 +62,7 @@ aside nav a {
       color: var(--black);
       display: flex;
       flex-direction: column;
+      line-height: 1.6;
     }
 
     .topbar {
@@ -356,6 +357,7 @@ aside nav a {
   background: var(--beige);
   font-family: 'Press Start 2P', cursive;
   font-size: 0.6rem;
+  line-height: 1.8;
 }
 
 
@@ -382,6 +384,7 @@ aside nav a {
         margin-left: 0;
         margin-top: 1rem;
         text-align: center;
+        line-height: 1.8;
       }
     }
       .retro-modal {
@@ -475,6 +478,7 @@ aside nav a {
       <a href="#home">Home</a>
       <a href="#!" onclick="openAboutMe()">About</a>
       <a href="#!" onclick="openProjects()">Projects</a>
+      <a href="#!" onclick="openCertificates()">Certificates</a>
       <a href="#contact">Contact</a>
     </nav>
   </aside>
@@ -506,10 +510,9 @@ aside nav a {
     <section class="card skills">
       <h2>Skill Sets</h2>
       <ul>
-        <li><strong>Languages:</strong> Python, C, JavaScript</li>
+        <li><strong>Languages:</strong> Python, C/C++, Java, JavaScript, HTML, CSS</li>
         <li><strong>Tools:</strong> Arduino, Git, R, Verilog</li>
-        <li><strong>Frameworks:</strong> TensorFlow, Node.js</li>
-        <li><strong>Other:</strong> Embedded C, Linux, Figma</li>
+        <li><strong>Other:</strong> Embedded C, Linux, MySQL</li>
       </ul>
     </section>
 
@@ -577,7 +580,7 @@ aside nav a {
         <i class="fas fa-folder"></i>
         <span>RightBeat</span>
       </div>
-      <div class="project-icon" onclick="openProjectDetails('Finanance Tracker')">
+      <div class="project-icon" onclick="openProjectDetails('Finance Tracker')">
         <i class="fas fa-folder"></i>
         <span>Finance Tracker</span>
       </div>
@@ -637,14 +640,61 @@ function openProjectDetails(projectName) {
 
   document.body.appendChild(modal);
 }
+function openCertificates() {
+  const modal = document.createElement('div');
+  modal.className = 'retro-modal';
+  modal.style.top = `${80 + Math.random() * 100}px`;
+  modal.style.left = `${30 + Math.random() * 40}%`;
+  modal.style.transform = `translateX(-50%)`;
+
+  modal.innerHTML = `
+    <div class="retro-modal-header" onmousedown="startDrag(event, this.parentElement)">
+      <span>Certificates</span>
+      <div>
+        <button onclick="minimizeWindow(this.parentElement.parentElement.parentElement)">_</button>
+        <button onclick="closeWindow(this.closest('.retro-modal'))">&times;</button>
+      </div>
+    </div>
+    <div class="retro-modal-body">
+      <div class="project-list">
+        <div class="project-icon" onclick="openCertificatePDF('certificates/IITM.pdf')">
+          <i class="fas fa-file-pdf"></i>
+          <span>IITM Foundation level</span>
+        </div>
+        <div class="project-icon" onclick="openCertificatePDF('certificates/Adobe.pdf')">
+          <i class="fas fa-file-pdf"></i>
+          <span>Adobe India</span>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+}
+
+function openCertificatePDF(filePath) {
+  window.open(filePath, '_blank');
+}
+
+
+
 function getProjectContent(name) {
   switch(name) {
     case 'RightBeat':
-      return `<p><strong>RightBeat</strong> is an AI-powered smartwatch that detects abnormal heart rhythms and automatically alerts healthcare providers.</p>`;
+      return `<p><strong>RightBeat</strong> is an AI-powered smartwatch that detects abnormal heart rhythms and automatically alerts healthcare providers.
+        This is a very raw project Idea of mine that i'm currently working on, by learning the required skills and techniques. I am also in the process of building a prototype with Arduino. </p>`;
     case 'Finance Tracker':
-      return `<p><strong>VisionCare</strong> monitors screen usage and provides break reminders to prevent digital eye strain using smart notifications.</p>`;
-    case 'EduBot':
-      return `<p><strong>Workout Tracker</strong> is a conversational AI bot that helps students learn coding concepts interactively.</p>`;
+      return ` <p><strong>Finance Tracker</strong></p>
+    <ul>
+      <li><strong>Transaction Recording:</strong> Input transactions with date, amount, category, and description. Stored in doubly linked list.</li>
+      <li><strong>Date Validation:</strong> Handles leap years and invalid inputs.</li>
+      <li><strong>Transaction Sorting:</strong> Transactions sorted by date.</li>
+      <li><strong>GitHub Repo:</strong><a href="https://github.com/shr-eexe/Finance_tracker" target="_blank" rel="noopener noreferrer">
+        Finance Tracker
+    </ul>`;
+    case 'Workout Tracker':
+      return `<p><strong>Workout Tracker</strong> It is a website created with HTML, CSS and JavaScript.
+         The user inputs their workout details and helps them keep track of their workout routine.</p>`;
     default:
       return `<p>No project details available.</p>`;
   }
